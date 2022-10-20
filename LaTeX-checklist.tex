@@ -1,0 +1,89 @@
+% -*- compile-command: "pdflatex LaTeX-checklist.tex" -*-
+\documentclass{article}
+
+\title{\protect\LaTeX\ checklist}
+
+\begin{document}
+
+\maketitle
+
+Blah blah
+
+\section*{Formatting}
+\label{sec:formatting}
+
+\begin{itemize}
+\item Use \verb|``| (two back ticks) and \verb|''| (two single quotes)
+  to create quotation marks, \verb|``like this''|.  The result should
+  look ``like this''.  If you use normal double quote charaters, the
+  result will look bad, "like this".
+\item Use a contrasting style like a typewriter font for code, names
+  of functions, \emph{etc.}
+  \begin{itemize}
+  \item Example: \verb|When we run the \texttt{BFS} function,|
+  \item Looks like this: When we run the \texttt{BFS} function,
+  \end{itemize}
+\item Use \verb|\emph{...}| to italicize things like Latin abbreviations
+  (\emph{e.g.}, \emph{e.g.} and \emph{i.e.}) or words you are going to
+  define (``A \emph{snoozle} is a special kind of matrix which\dots'').
+\item There are four kinds of horizontal lines:
+  \begin{itemize}
+  \item A minus sign is created by using a hyphen inside math mode.
+    \begin{itemize}
+    \item Example: \verb|$-3$| looks like: $-3$
+    \item Example (bad): \verb|-$3$| looks like: -$3$
+    \end{itemize}
+  \item A single hyphen is used for hyphenated words.
+    \begin{itemize}
+    \item Example: \verb|helter-skelter| looks like: helter-skelter
+    \end{itemize}
+  \item A double hyphen creates an ``en-dash'', which is used for
+    ranges.
+    \begin{itemize}
+    \item \verb|Please read pages 23--69| looks like: Please read
+      pages 23--69
+    \end{itemize}
+  \item A triple hyphen creates an ``em-dash'', which is used as
+    punctuation to signal a break in thought
+    \begin{itemize}
+    \item Example: \verb|If this were true---which it isn't---then|
+      looks like: If this were true---which it isn't---then
+    \end{itemize}
+  \end{itemize}
+\item Use \verb|itemize| or \verb|enumerate| for lists. For example,
+\begin{verbatim}
+\begin{itemize}
+  \item One thing
+  \item Another thing
+  \item Last thing
+\end{itemize}
+\end{verbatim}
+  looks like this:
+
+  \begin{itemize}
+  \item One thing
+  \item Another thing
+  \item Last thing
+  \end{itemize}
+
+  Using \verb|enumerate| instead of \verb|itemize| causes the items to
+  be sequentially numbered.
+
+\item If you use a command in the middle of some text, by default it
+  will eat any following whitespace; for example,%
+  \verb|\LaTeX is great| is typeset like this: \LaTeX is great.
+  Follow the command with a backslash before the space to force an
+  explicit space to appear, like this: \verb|\LaTeX\ is great|.
+\item \LaTeX\ automatically puts extra space at the end of every
+  sentence, but it thinks any punctuation is the end of a sentence, so
+  abbreviations can have too much space after them.  Use a backslash
+  before the space to force a normal space.  For example:
+  \begin{itemize}
+  \item \verb|Dr. Yorgey| looks like this (bad): Dr. Yorgey
+  \item \verb|Dr.\ Yorgey| looks like this (good): Dr.\ Yorgey
+  \end{itemize}
+\end{itemize}
+
+
+
+\end{document}
