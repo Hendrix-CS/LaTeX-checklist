@@ -1,89 +1,189 @@
 % -*- compile-command: "pdflatex LaTeX-checklist.tex" -*-
 \documentclass{article}
 
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[most]{tcolorbox}
+
 \title{\protect\LaTeX\ checklist}
+\date{}
+
+\newtcblisting{good}{colframe=green!50!black}
+\newtcblisting{bad}{colframe=red!50!black}
 
 \begin{document}
 
 \maketitle
 
 Blah blah
+\def\arraystretch{1.5}
 
 \section*{Formatting}
 \label{sec:formatting}
 
 \begin{itemize}
 \item Use \verb|``| (two back ticks) and \verb|''| (two single quotes)
-  to create quotation marks, \verb|``like this''|.  The result should
-  look ``like this''.  If you use normal double quote charaters, the
-  result will look bad, "like this".
+  to create quotation marks:
+\begin{good}
+``like this!''
+\end{good}
+If you use normal double quote charaters, the result will be typeset
+using two ``close quote'' characters.
+\begin{bad}
+"These quote marks look bad."
+\end{bad}
+
+
 \item Use a contrasting style like a typewriter font for code, names
   of functions, \emph{etc.}
-  \begin{itemize}
-  \item Example: \verb|When we run the \texttt{BFS} function,|
-  \item Looks like this: When we run the \texttt{BFS} function,
-  \end{itemize}
+  \begin{good}When we run the \texttt{BFS} function\end{good}
 \item Use \verb|\emph{...}| to italicize things like Latin abbreviations
-  (\emph{e.g.}, \emph{e.g.} and \emph{i.e.}) or words you are going to
-  define (``A \emph{snoozle} is a special kind of matrix which\dots'').
+  (such as \emph{e.g.} and \emph{i.e.}) or words you are going to
+  define.
+\begin{good}
+A \emph{snoozle} is a special kind of matrix which has all entries less than $1/2$.
+\end{good}
 \item There are four kinds of horizontal lines:
   \begin{itemize}
   \item A minus sign is created by using a hyphen inside math mode.
-    \begin{itemize}
-    \item Example: \verb|$-3$| looks like: $-3$
-    \item Example (bad): \verb|-$3$| looks like: -$3$
-    \end{itemize}
+    \begin{good}$(-2) - 3$\end{good}
+    \begin{bad}$x$ = -4  % A minus sign outside of math mode\end{bad}
   \item A single hyphen is used for hyphenated words.
-    \begin{itemize}
-    \item Example: \verb|helter-skelter| looks like: helter-skelter
-    \end{itemize}
+    \begin{good}helter-skelter\end{good}
   \item A double hyphen creates an ``en-dash'', which is used for
     ranges.
-    \begin{itemize}
-    \item \verb|Please read pages 23--69| looks like: Please read
-      pages 23--69
-    \end{itemize}
+    \begin{good}Pages 23--69 discuss the period 1952--1987.\end{good}
   \item A triple hyphen creates an ``em-dash'', which is used as
-    punctuation to signal a break in thought
-    \begin{itemize}
-    \item Example: \verb|If this were true---which it isn't---then|
-      looks like: If this were true---which it isn't---then
-    \end{itemize}
+    punctuation to signal a break in thought.  The usual typesetting
+    style (in the US, at least) is to leave no spaces on either side
+    of the em-dash.
+    \begin{good}If this were true---which it isn't---then\end{good}
   \end{itemize}
-\item Use \verb|itemize| or \verb|enumerate| for lists. For example,
-\begin{verbatim}
+\item Use \verb|itemize| or \verb|enumerate| for lists.
+\begin{good}
 \begin{itemize}
   \item One thing
   \item Another thing
   \item Last thing
 \end{itemize}
-\end{verbatim}
-  looks like this:
-
-  \begin{itemize}
-  \item One thing
-  \item Another thing
-  \item Last thing
-  \end{itemize}
-
+\end{good}
   Using \verb|enumerate| instead of \verb|itemize| causes the items to
   be sequentially numbered.
 
 \item If you use a command in the middle of some text, by default it
-  will eat any following whitespace; for example,%
-  \verb|\LaTeX is great| is typeset like this: \LaTeX is great.
+  will eat any following whitespace:
+\begin{bad}
+\LaTeX is great
+\end{bad}
   Follow the command with a backslash before the space to force an
-  explicit space to appear, like this: \verb|\LaTeX\ is great|.
+  explicit space to appear, like this:
+\begin{good}
+\LaTeX\ is great
+\end{good}
 \item \LaTeX\ automatically puts extra space at the end of every
   sentence, but it thinks any punctuation is the end of a sentence, so
   abbreviations can have too much space after them.  Use a backslash
-  before the space to force a normal space.  For example:
+  before the space to force a normal space.  (But this is kind of nitpicky
+  since it can be hard to even tell the difference!)
+\begin{bad}
+Dr. Yorgey likes \LaTeX
+\end{bad}
+\begin{good}
+Dr.\ Yorgey likes \LaTeX
+\end{good}
+
+\end{itemize}
+
+\section*{Math}
+\label{sec:math}
+
+\begin{itemize}
+\item Use the \texttt{amsmath} and \texttt{amssymb} packages by
+  putting \verb|\usepackage{amsmath}| and \verb|\usepackage{amssymb}|
+  in the \emph{preamble} of your document (that is, the part before
+  \verb|\begin{document}|).
+\item Use math mode appropriately:
   \begin{itemize}
-  \item \verb|Dr. Yorgey| looks like this (bad): Dr. Yorgey
-  \item \verb|Dr.\ Yorgey| looks like this (good): Dr.\ Yorgey
+  \item Use dollar signs for inline mathematics (including variable
+    names, numbers, equations, formulas, \dots)
+    \begin{good}
+In this case, $x$ cannot possibly be $-3$, because we assumed that $x > 10$.
+    \end{good}
+  \item Use \verb|\[ ... \]| for formulas or equations that should go
+    on their own line.
+    \begin{good}
+Solving for $x$, we find that \[ x = 2 + y^2 - \pi, \] which is what we wanted to show.
+    \end{good}
+ \item Use \verb|$ ... $| or \verb|\[ ... \]| for an entire
+   equation/formula, instead of building it out of lots of little
+   pieces. Use \verb|\text{...}| if you need some normal text in the
+     middle of your formula.
+   \begin{bad}
+$x$ = $\pm 2$ or $(\sqrt{7} - \pi)$
+   \end{bad}
+   \begin{good}
+$x = \pm 2 \text{ or } (\sqrt{7} - \pi)$
+   \end{good}
+  \end{itemize}
+\item Use \verb|\mathit{...}| for longer variable names in math mode.
+  \begin{bad}
+$myFunction(x) \times 2^n$
+  \end{bad}
+  \begin{good}
+$\mathit{myFunction}(x) \times 2^n$
+  \end{good}
+\item Use commands like \verb|\log|, \verb|\sin|, \verb|\cos|,
+  \verb|\lim| appropriately.
+  \begin{bad}
+$n log(n) + lim_{x \to \infty} \frac{cos \theta}{x^2}$
+  \end{bad}
+  \begin{good}
+$n \log(n) + \lim_{x \to \infty} \frac{\cos \theta}{x^2}$
+  \end{good}
+\item Use \verb|\dots| for ellipses and \verb|\cdots| for centered ellipses.
+  \begin{bad}
+$\{1, 2, ..., 10\}$
+  \end{bad}
+  \begin{bad}
+$1 + 2 + ... + 10$
+  \end{bad}
+  \begin{good}
+$\{1, 2, \dots, 10\}$
+  \end{good}
+  \begin{good}
+$1 + 2 + \cdots + 10$
+  \end{good}
+\item Use \verb|\begin{align} ... \end{align}| for multi-step
+  derivations.
+\item Use \verb|\mathbb{...}| for appropriate symbols.
+  \begin{itemize}
+  \item Example: \verb|$\mathbb{R} - \mathbb{N}$| looks like: $\mathbb{R} - \mathbb{N}$
+  \end{itemize}
+\item Use \verb|{...}| around multi-character exponents, subscripts, \emph{etc.}
+  \begin{itemize}
+  \item Example (bad): \verb|$2^15$| looks like: $2^15$
+  \item Example: \verb|$2^{15}$| looks like: $2^{15}$
+  \end{itemize}
+\item Use \verb|\left| and \verb|\right| to make sure delimiters are
+  big enough.
+  \begin{itemize}
+  \item Example (bad): %
+    \verb|$(\frac{\pi}{\sum_{k=1}^{\infty} \frac{1}{k^2}})$| looks
+    like $(\frac{\pi}{\sum_{k=1}^{\infty} \frac{1}{k^2}})$
+  \item Example: %
+    \verb|$\left( \frac{\pi}{\sum_{k=1}^{\infty} \frac{1}{k^2}} \right)$| looks
+    like $\left(\frac{\pi}{\sum_{k=1}^{\infty} \frac{1}{k^2}}\right)$
   \end{itemize}
 \end{itemize}
 
+\section*{Organization}
+
+\begin{itemize}
+\item Use \verb|\chapter|, \verb|\section|, \verb|subsection|,
+  \emph{etc.} appropriately
+\item Use \verb|\label| and \verb|\ref| appropriately to refer to
+  numbered sections, theorems, figures, \emph{etc.}
+\end{itemize}
 
 
 \end{document}
