@@ -1,9 +1,11 @@
-% -*- compile-command: "pdflatex LaTeX-checklist.tex" -*-
+% -*- compile-command: "rubber --unsafe -d LaTeX-checklist.tex" -*-
 \documentclass{article}
 
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage[most]{tcolorbox}
+\usepackage{hyperref}
+\usepackage{minted}
 
 \title{Hendrix \protect\LaTeX\ checklist for students}
 \date{}
@@ -186,6 +188,32 @@ $1 + 2 + \cdots + 10$
     \verb|$\left( \frac{\pi}{\sum_{k=1}^{\infty} \frac{1}{k^2}} \right)$| looks
     like $\left(\frac{\pi}{\sum_{k=1}^{\infty} \frac{1}{k^2}}\right)$
   \end{itemize}
+\end{itemize}
+
+\section*{Code}
+
+\begin{itemize}
+\item Use the \texttt{minted}
+  package\footnote{\url{https://www.overleaf.com/learn/latex/Code_Highlighting_with_minted}}
+  to typeset nicely syntax-highlighted code.
+  \begin{bad}
+\begin{verbatim}
+def fac(n: int) -> int:
+    if n <= 1:
+        return n
+    else:
+        return n * fac(n-1)
+\end{verbatim}
+  \end{bad}
+  \begin{good}
+\begin{minted}{python}
+def fac(n: int) -> int:
+    if n <= 1:
+        return n
+    else:
+        return n * fac(n-1)
+\end{minted}
+  \end{good}
 \end{itemize}
 
 \section*{Organization}
