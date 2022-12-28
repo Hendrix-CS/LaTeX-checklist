@@ -8,7 +8,6 @@
 \usepackage{minted}
 
 \title{Hendrix \protect\LaTeX\ checklist for students}
-\date{}
 
 \newtcblisting{good}{colframe=green!50!black}
 \newtcblisting{bad}{colframe=red!50!black}
@@ -23,14 +22,31 @@ distributing high-quality documents in mathematics and computer
 science, and you may be required to use it in several classes
 throughout the Mathematics and Computer Science majors.
 
-For creating \LaTeX\ documents, we recommend using XXX Overleaf, a
-free online editor that even allows multiple people to easily
-collaborate on the same document.  For learning about the basics of
-\LaTeX, we recommend working through some of the exercises in the XXX
-Bates LaTeX Manual.
+For creating \LaTeX\ documents, we recommend using
+\href{http://overleaf.com}{Overleaf}, a free online editor that even
+allows multiple people to easily collaborate on the same document.
+For learning about the basics of \LaTeX, we recommend working through
+some of the exercises in the
+\href{https://www.bates.edu/mathematics/resources/latex-manual/}{Bates
+  LaTeX Manual}, or the \href{https://overleaf.com/learn/latex}{Overleaf
+  tutorials}.
 
 This document is a simple checklist you can use to ensure you are
-XXX.  It can be found at XXX.
+following some basic best practices for creating professional-looking
+\LaTeX\ documents.  It can be found at \url{https://github.com/Hendrix-CS/XXX}.
+
+Throughout this document, examples of \textbf{bad} \LaTeX\ style are typeset in
+a red box, like the one below.  You can see the \LaTeX\ code in the top half of
+the box, and the resulting typeset document on the bottom.
+\begin{bad}
+$2^120 is a big number$.  Don't copy the red boxes!
+\end{bad}
+
+Examples of good style, on the other hand, are typeset in a green box,
+like this:
+\begin{good}
+$2^{120}$ is a big number.  Pay attention to the green boxes!
+\end{good}
 
 \section*{Formatting}
 \label{sec:formatting}
@@ -47,15 +63,11 @@ using two ``close quote'' characters.
 "These quote marks look bad."
 \end{bad}
 
-
-\item Use a contrasting style like a typewriter font for code, names
-  of functions, \emph{etc.}
-  \begin{good}When we run the \texttt{BFS} function\end{good}
 \item Use \verb|\emph{...}| to italicize things like Latin abbreviations
   (such as \emph{e.g.} and \emph{i.e.}) or words you are going to
   define.
 \begin{good}
-A \emph{snoozle} is a special kind of matrix which has all entries less than $1/2$.
+A \emph{snoozle} is a special kind of matrix which has all positive entries, \emph{i.e.} all the entries are greater than zero.
 \end{good}
 \item There are four kinds of horizontal lines:
   \begin{itemize}
@@ -123,8 +135,8 @@ Dr.\ Yorgey likes \LaTeX
     \begin{good}
 In this case, $x$ cannot possibly be $-3$, because we assumed that $x > 10$.
     \end{good}
-  \item Use \verb|\[ ... \]| for formulas or equations that should go
-    on their own line.
+  \item Use \verb|\[ ... \]| for formulas or equations that should be
+    centered on their own line.
     \begin{good}
 Solving for $x$, we find that \[ x = 2 + y^2 - \pi, \] which is what we wanted to show.
     \end{good}
@@ -138,56 +150,83 @@ $x$ = $\pm 2$ or $(\sqrt{7} - \pi)$
    \begin{good}
 $x = \pm 2 \text{ or } (\sqrt{7} - \pi)$
    \end{good}
+   \begin{good}
+\[ f(x) = \begin{cases} x^2 & \text{if } x > 0 \\ x & \text{otherwise} \end{cases} \]
+   \end{good}
   \end{itemize}
 \item Use \verb|\mathit{...}| for longer variable names in math mode.
+  Without this command, \LaTeX\ thinks all the letters represent
+  individual variables being multiplied together, and will insert
+  extra space between them.  For example, notice how much space is
+  between the letters $F$ and $u$ below:
   \begin{bad}
 $myFunction(x) \times 2^n$
   \end{bad}
+  With the \verb|\mathit{...}| command, \LaTeX\ knows that the entire
+  thing is supposed to be one word:
   \begin{good}
 $\mathit{myFunction}(x) \times 2^n$
   \end{good}
 \item Use commands like \verb|\log|, \verb|\sin|, \verb|\cos|,
-  \verb|\lim| appropriately.
+  \verb|\lim| appropriately.  Typically such ``operator words'' are
+  typeset with upright letters, unlike variables which
+  are typeset in italics.  Using the appropriate commands ensures
+  these operators are formatted correctly, with appropriate space
+  around them.
   \begin{bad}
 $n log(n) + lim_{x \to \infty} \frac{cos \theta}{x^2}$
   \end{bad}
   \begin{good}
 $n \log(n) + \lim_{x \to \infty} \frac{\cos \theta}{x^2}$
   \end{good}
-\item Use \verb|\dots| for ellipses and \verb|\cdots| for centered ellipses.
+\item Use \verb|\dots| for ellipses and \verb|\cdots| for centered
+  ellipses. Using actual periods looks too squashed:
   \begin{bad}
 $\{1, 2, ..., 10\}$
   \end{bad}
   \begin{bad}
 $1 + 2 + ... + 10$
   \end{bad}
+  The \verb|\dots| and \verb|\cdots| (centered dots) commands produce
+  more evenly spaced dots:
   \begin{good}
 $\{1, 2, \dots, 10\}$
   \end{good}
   \begin{good}
 $1 + 2 + \cdots + 10$
   \end{good}
-\item Use \verb|\begin{align} ... \end{align}| for multi-step
+\item Use \verb|\begin{align*} ... \end{align*}| for multi-step
   derivations.
+  \begin{good}
+\begin{align*}
+f(n) &= x + x^2 + \cdots + x^n \\
+     &= x(1 + x + \cdots + x^{n-1}) \\
+     &= x \frac{x^n - 1}{x - 1}
+\end{align*}
+  \end{good}
 \item Use \verb|\mathbb{...}| for appropriate symbols.
-  \begin{itemize}
-  \item Example: \verb|$\mathbb{R} - \mathbb{N}$| looks like: $\mathbb{R} - \mathbb{N}$
-  \end{itemize}
-\item Use \verb|{...}| around multi-character exponents, subscripts, \emph{etc.}
-  \begin{itemize}
-  \item Example (bad): \verb|$2^15$| looks like: $2^15$
-  \item Example: \verb|$2^{15}$| looks like: $2^{15}$
-  \end{itemize}
+  \begin{good}
+$\mathbb{R} - \mathbb{N}$
+  \end{good}
+\item Use \verb|{...}| around multi-character exponents, subscripts,
+  \emph{etc.}
+  \begin{bad}
+$2^15$
+  \end{bad}
+  \begin{good}
+$2^{15}$
+  \end{good}
 \item Use \verb|\left| and \verb|\right| to make sure delimiters are
-  big enough.
-  \begin{itemize}
-  \item Example (bad): %
-    \verb|$(\frac{\pi}{\sum_{k=1}^{\infty} \frac{1}{k^2}})$| looks
-    like $(\frac{\pi}{\sum_{k=1}^{\infty} \frac{1}{k^2}})$
-  \item Example: %
-    \verb|$\left( \frac{\pi}{\sum_{k=1}^{\infty} \frac{1}{k^2}} \right)$| looks
-    like $\left(\frac{\pi}{\sum_{k=1}^{\infty} \frac{1}{k^2}}\right)$
-  \end{itemize}
+  big enough.  In this first example, notice how the parentheses are
+  not tall enough to enclose everything inside them:
+  \begin{bad}
+$(\frac{\pi}{\sum_{k=1}^{\infty} \frac{1}{k^2}})$
+  \end{bad}
+  Putting the \verb|\left| and \verb|\right| commands before the
+  parentheses ensures they are big enough:
+  \begin{good}
+$\left( \frac{\pi}{\sum_{k=1}^{\infty} \frac{1}{k^2}} \right)$
+  \end{good}
 \end{itemize}
 
 \section*{Code}
@@ -195,32 +234,44 @@ $1 + 2 + \cdots + 10$
 \begin{itemize}
 \item Use the \texttt{minted}
   package\footnote{\url{https://www.overleaf.com/learn/latex/Code_Highlighting_with_minted}}
-  to typeset nicely syntax-highlighted code.
+  to typeset nicely syntax-highlighted code.  A \verb|verbatim|
+  environment is not very flexible and can only produce black and
+  white text:
   \begin{bad}
 \begin{verbatim}
-def fac(n: int) -> int:
+def facRec(n: int) -> int:
     if n <= 1:
         return n
     else:
-        return n * fac(n-1)
+        return n * facRec(n-1)
 \end{verbatim}
   \end{bad}
+The \texttt{minted} package can produce code with syntax highlighting,
+and has many other options as well, such as line numbering, including
+code from an external file, \emph{etc.}
   \begin{good}
 \begin{minted}{python}
-def fac(n: int) -> int:
+def facRec(n: int) -> int:
     if n <= 1:
         return n
     else:
-        return n * fac(n-1)
+        return n * facRec(n-1)
 \end{minted}
   \end{good}
+\item Use a contrasting style like a typewriter font for code, names
+  of functions, \emph{etc.}
+  \begin{bad}When we call facRec(10),\end{bad}
+  \begin{good}When we call \texttt{facRec(10)},\end{good}
+  Even better, use the \verb|mintinline| command from the
+  \texttt{minted} package:
+  \begin{good}When we call \mintinline{python}{facRec(10)},\end{good}
 \end{itemize}
 
 \section*{Organization}
 
 \begin{itemize}
-\item Use \verb|\chapter|, \verb|\section|, \verb|subsection|,
-  \emph{etc.} appropriately
+\item Use \verb|\chapter|, \verb|\section|, \verb|\subsection|,
+  \emph{etc.} appropriately to create sections within your document.
 \item Use \verb|\label| and \verb|\ref| appropriately to refer to
   numbered sections, theorems, figures, \emph{etc.}
 \end{itemize}
