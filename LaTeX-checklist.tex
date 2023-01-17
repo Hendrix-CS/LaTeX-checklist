@@ -33,7 +33,7 @@ some of the exercises in the
 
 This document is a simple checklist you can use to ensure you are
 following some basic best practices for creating professional-looking
-\LaTeX\ documents.  It can be found at \url{https://github.com/Hendrix-CS/XXX}.
+\LaTeX\ documents.  It can be found at \url{https://github.com/Hendrix-CS/LaTeX-checklist/blob/main/LaTeX-checklist.tex}.
 
 Throughout this document, examples of \textbf{bad} \LaTeX\ style are typeset in
 a red box, like the one below.  You can see the \LaTeX\ code in the top half of
@@ -42,7 +42,7 @@ the box, and the resulting typeset document on the bottom.
 $2^120 is a big number$.  Don't copy the red boxes!
 \end{bad}
 
-Examples of good style, on the other hand, are typeset in a green box,
+Examples of \textbf{good} style, on the other hand, are typeset in a green box,
 like this:
 \begin{good}
 $2^{120}$ is a big number.  Pay attention to the green boxes!
@@ -52,6 +52,16 @@ $2^{120}$ is a big number.  Pay attention to the green boxes!
 \label{sec:formatting}
 
 \begin{itemize}
+\item Use a blank line as separation between paragraphs.
+\begin{good}
+This is the first paragraph.  Lorem ipsum dolor sit amet,
+consectetur adipiscing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua.
+
+This is another paragraph.  Normally the start of the
+paragraph will be indented for you automatically, though
+it looks a bit different inside this green box.
+\end{good}
 \item Use \verb|``| (two back ticks) and \verb|''| (two single quotes)
   to create quotation marks:
 \begin{good}
@@ -90,12 +100,28 @@ A \emph{snoozle} is a special kind of matrix which has all positive entries, \em
 \begin{itemize}
   \item One thing
   \item Another thing
+    \begin{itemize}
+    \item Lists can
+    \item be nested
+    \end{itemize}
   \item Last thing
 \end{itemize}
 \end{good}
   Using \verb|enumerate| instead of \verb|itemize| causes the items to
   be sequentially numbered.
+\begin{good}
+\begin{enumerate}
+  \item One thing
+  \item Another thing
+  \item Last thing
+\end{enumerate}
+\end{good}
+Don't just try to make your own bulleted list manually.
+\begin{bad}
+* This looks bad
 
+* And also won't have the right amount of space around it
+\end{bad}
 \item If you use a command in the middle of some text, by default it
   will eat any following whitespace:
 \begin{bad}
@@ -154,6 +180,15 @@ $x = \pm 2 \text{ or } (\sqrt{7} - \pi)$
 \[ f(x) = \begin{cases} x^2 & \text{if } x > 0 \\ x & \text{otherwise} \end{cases} \]
    \end{good}
   \end{itemize}
+\item Equations and formulas should be used as part of complete
+  sentences with proper punctuation.
+  \begin{good}
+Solving for $x$, we find that \[ x = 2 + y^2 - \pi, \] and
+therefore \[ x > 2z. \]
+  \end{good}
+  \begin{bad}
+Solving for $x$ \[ x = 2 + y^2 - \pi \] \[ x > 2z \]
+  \end{bad}
 \item Use \verb|\mathit{...}| for longer variable names in math mode.
   Without this command, \LaTeX\ thinks all the letters represent
   individual variables being multiplied together, and will insert
